@@ -1,0 +1,667 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SKH Password Manager 1.0</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/jquery-confirm.min.css">
+  <script>
+        window.$ = window.jQuery = require("./js/jquery.min.js");
+        const database = require('./js/database');
+        $(window).bind("load", function() {
+            "use strict";
+            $(".spn_hol").fadeOut(1000);
+        });
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-confirm.min.js"></script>
+  <style >
+     * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        box-sizing: border-box;
+      }
+
+      .container {
+        padding: 20px;
+        padding-top: 40px;
+        text-align: center;
+      }
+      .container .product {
+        position: relative;
+        overflow: hidden;
+        width: 200px;
+        height: 150px;
+        display: inline-block;
+        border: 1px solid #ad0000;
+        border-radius: 0px;
+        background-color: white;
+        margin: 5px;
+        padding: 10px;
+      }
+      .container .product:hover {
+        border-radius: 0px 20px 0px;
+        background: rgb(253, 231, 231);
+        color: #ad0000;
+      }
+
+      .container .product h2 {
+        text-align: left;
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      .container .product .description {
+        text-align: left;
+        font-size: 13px;
+        color: rgb(0, 0, 0);
+        max-height: 23px;
+        overflow: hidden;
+      }
+      .container .product .price {
+        text-align: right;
+        font-size: 18px;
+        color: rgb(0, 0, 0);
+        margin-top: 6px;
+      }
+      .container .product .btn {
+        position: absolute;
+        font-size: 13px;
+        font-weight: bold;
+        float: right;
+        padding: 10px;
+        border: 2px solid #ad0000;
+        border-radius: 20px;
+        bottom: 10px;
+        right: 10px;
+        color: #ad0000;
+        cursor: pointer;
+        overflow: hidden;
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+      }
+      .container .product .btn.ok {
+        background-color: rgba(0, 254, 254, 0.4);
+        color: rgb(26, 26, 26);
+      }
+      .container .product .btn.ok:after {
+        content: "\e080";
+        color: rgb(61, 61, 61);
+      }
+      .container .product .btn:hover {
+        padding-right: 25px;
+      }
+      .container .product .btn:hover:after {
+        margin-left: 5px;
+      }
+      .container .product .btn:after {
+        content: '→';
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+        position: absolute;
+        color: #ad0000;
+        margin-left: 30px;
+        transition: all .2s ease;
+      }
+      .container .product .quickview {
+        position: absolute;
+        bottom: 20px;
+        font-size: 13px;
+        color: black;
+        cursor: pointer;
+
+      }
+      .container .product .quickview:before {
+        content: "♥";
+        margin-right: 3px;
+      }
+      
+      .quickviewContainer {
+        position: fixed;
+        height: 100vh;
+        width: 400px;
+        background: rgb(253, 231, 231);
+        top: 70px;
+        right: -100%;
+        -webkit-transition: all .3s ease;
+        transition: all .3s ease;
+        padding: 30px;
+        color:#ad0000;
+      }
+      .quickviewContainer .close {
+        height: 20px;
+        width: 20px;
+        float: right;
+        cursor: pointer;
+      }
+      .quickviewContainer .close:before, .quickviewContainer .close:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 2px;
+        background-color: rgb(39, 39, 39);
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+      }
+      .quickviewContainer .close:after {
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+      }
+      .quickviewContainer .headline {
+        margin-bottom: 30px;
+        font-size: 18px;
+      }
+      .quickviewContainer .description {
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .quickviewContainer.active {
+        right: 0;
+      }
+      .field {
+        width: 100%;
+        display: block;
+        padding: 7px;
+        background-color: white;
+        color: #ad0000;
+        border: 1px solid #ad0000;
+        margin-bottom: 10px;
+      }
+      .lbl{
+        width: 100%;
+        display: block;
+        color: black;
+      }
+      .field .copy-button {
+          position: absolute;
+          Left: 83%;
+          margin-top: -5px;
+          height: 30px;
+          background: transparent;
+          /* Left/right and top/bottom offsets etc. */
+      }
+      .delBtn{
+        padding: 8px;
+        color: red;
+        border: 1px solid red;
+        background-color: rgb(253, 231, 231)
+      }
+      .form-control{
+        border: 1px solid #ad0000;
+        border-radius: 0px;
+      }
+      .form-control :focus{
+        outline: none;
+      }
+      .hide{
+        display: none;
+      }
+      .spn_hol {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 50000;
+  opacity: 1;
+   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  margin-top: -12px;
+  left: 50%;
+  margin-left: -35px;
+  height: 24px;
+  width: 70px;
+  text-align: center;
+  display: block;
+}
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+      -webkit-transform: scale(0.0)
+  }
+  40% {
+      -webkit-transform: scale(1.0)
+  }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+  }
+  40% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+  }
+}
+  </style>
+</head>
+<body>
+      <!-- PRELOADER -->
+      <div class="spn_hol">
+          <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+          </div>
+      </div>   
+   <!-- END PRELOADER -->
+<div class="container-fluid">
+    <h3>STORE DIGITAL RECORDS
+      <div class="pull-right">
+          <a href="dashboard.html" class="btn btn-default" style="border-radius:0px;">Home</a>         
+          <button class="btn btn-default" style="border-radius:0px;" id="addnew">Add New</button>
+          <a href="login.html" class="btn btn-default" style="border-radius:0px;">Logout</a>         
+      </div>
+    </h3>
+    <hr>
+</div> 
+  <div class="container" id="conatainer">
+
+  </div>
+  <div class='quickviewContainer' id="mycont">
+      <div class='close'></div>
+      <h2 class='headline'></h2>
+      <div class='description'>
+      </div>
+      <div id="newform" class="hide">
+          <div class="form-group">
+          <label>Digital Record Type</label>
+            <select class="form-control" required id="mainSelector">
+              <option>Select Type</option>
+              <option>Software Licence</option>
+              <option>WiFi Password</option>
+              <option>Insurance cards</option>
+              <option>Simple Note</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div id="swlic"class="hide">
+              <div class="form-group">
+                  <label>Software Name</label>
+                  <input type="text" placeholder="Example : Windows" id="swnm" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label>Serial Number / Activation key</label>
+                  <input type="text" placeholder="Example : FKFD4-E54ER-45FE4-ERE4D-FDS55" id="swsec" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Other Informations</label>
+                    <textarea class="form-control" rows="3" id="swnote"></textarea>
+                </div>
+          </div>
+          
+          <div id="wifi"class="hide">
+                <div class="form-group">
+                  <label>SSID Name</label>
+                  <input type="text" placeholder="Example : BELL4G" id="wifiname" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label>WiFi Password</label>
+                  <input type="password" placeholder="Example : **********" id="wifipswd" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Other Informations</label>
+                    <textarea class="form-control" rows="3" id="wifinotes"></textarea>
+                </div>
+          </div>
+          <div id="insurance" class="hide">
+                <div class="form-group">
+                  <label>Insurance Provider</label>
+                  <input type="text" placeholder="Example : Sri Lanka Insurance" id="insname" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label>Policy No</label>
+                  <input type="text" placeholder="Example : 1000002323000222" id="inspolicy" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Other Informations</label>
+                    <textarea class="form-control" rows="3" id="insnotes"></textarea>
+                </div>
+          </div>
+          <div id="note" class="hide">
+                <div class="form-group">
+                  <label>Note Heading</label>
+                  <input type="text" placeholder="Example : Next Plan" id="nothead" class="form-control"/>
+                </div>
+                <div class="form-group">
+                  <label>Note body</label>
+                  <textarea class="form-control" rows="6" id="notbody"></textarea>
+                </div>
+          </div>
+
+          <div id="other" class="hide">
+                <div class="form-group">
+                  <label>Extra Information</label>
+                  <textarea class="form-control" rows="11" id="othernote"></textarea>
+                </div>
+          </div>
+
+          <button class="btn btn-default pull-right" style="border-radius:0px;" disabled type="button" id="addrecord" onclick="addrec()">Add Record</button>
+    </div>
+  </div>
+  <script>
+      $('#mainSelector').on('change', function() {
+        var selectType = $('#mainSelector').val();
+        if(selectType == 'Select Type'){ $('#addrecord').attr('disabled','disabled'); }else{
+          $('#addrecord').removeAttr('disabled'); }
+        if(selectType == 'Software Licence'){ $('#swlic').removeClass('hide'); }else{ $('#swlic').addClass('hide'); }
+        if(selectType == 'WiFi Password'){ $('#wifi').removeClass('hide'); }else{ $('#wifi').addClass('hide'); }
+        if(selectType == 'Insurance cards'){ $('#insurance').removeClass('hide'); }else{ $('#insurance').addClass('hide'); }
+        if(selectType == 'Simple Note'){ $('#note').removeClass('hide'); }else{ $('#note').addClass('hide'); }
+        if(selectType == 'Other'){ $('#other').removeClass('hide'); }else{ $('#other').addClass('hide'); }
+      })
+      var quickview = $('.quickviewContainer'),
+        quickViewBtn = $('.quickview'),
+        ViewBtn = $('.quickbtn'),
+        close = $('.quickviewContainer .close');
+        close.on('click', function(){
+          quickview.removeClass('active');
+        });
+
+      $( document ).ready(function() {
+       populateRecord();    
+        $( "#addnew" ).click(function() {
+          var quickViewHeader = $('.quickviewContainer .headline'),
+            quickViewDescription = $('.quickviewContainer .description'),
+            nodesc = "";
+            newform =$('#newform'),
+            head = "ADD NEW STORE DIGITAL RECORD";
+          clearTimeout(timeQuick);
+            if(quickview.hasClass('active')){
+              quickview.removeClass('active');
+              newform.removeClass('hide');
+              var timeQuick = setTimeout(function(){
+                quickview.addClass('active');
+              }, 300);
+            } else{
+              quickview.addClass('active');
+              newform.removeClass('hide');
+            }
+          quickViewHeader.html(head);
+          quickViewDescription.html(nodesc);
+        });
+      });
+    
+    function addrec(){
+      var selectType = $('#mainSelector').val();
+        if(selectType == 'WiFi Password'){
+          var snm = $('#wifiname').val(),
+          spswd = $('#wifipswd').val(),
+          snote = $('#wifinotes').val();
+          if(snm == "" && spswd == ""){
+            $.alert("please fill required fields.")
+          }else{
+            database.addRecord(selectType, snm, spswd, snote);
+            clearField();
+            populateRecord()
+            if(quickview.hasClass('active')){
+                quickview.removeClass('active');
+            }
+            $.alert("New WiFi network information added.");
+          }
+        }else if(selectType == 'Software Licence'){
+          var swnm = $('#swnm').val(),
+          swkey = $('#swsec').val(),
+          swnote = $('#swnote').val();
+          if(swnm == "" && swkey == ""){
+            $.alert("please fill required fields.")
+          }else{
+            database.addRecord(selectType, swnm, swkey, swnote);
+            clearField();
+            populateRecord()
+            if(quickview.hasClass('active')){
+                quickview.removeClass('active');
+            }
+            $.alert("New Software Licence information added.");
+          }
+        }else if(selectType == 'Insurance cards'){
+          var innm = $('#insname').val(),
+          inkey = $('#inspolicy').val(),
+          innote = $('#insnotes').val();
+          if(innm == "" && inkey == ""){
+            $.alert("please fill required fields.")
+          }else{
+            database.addRecord(selectType, innm, inkey, innote);
+            clearField();
+            populateRecord()
+            if(quickview.hasClass('active')){
+                quickview.removeClass('active');
+            }
+            $.alert("New Insurance cards information added.");
+          }
+        }else if(selectType == 'Simple Note'){
+          var nthead = $('#nothead').val(),
+          ntbody = $('#notbody').val(), ed = "";
+          if(nthead == "" && ntbody == ""){
+            $.alert("please fill required fields.")
+          }else{
+            database.addRecord(selectType, nthead, ntbody, ed);
+            clearField();
+            populateRecord()
+            if(quickview.hasClass('active')){
+                quickview.removeClass('active');
+            }
+            $.alert("New Simple Note added.");
+          }
+        }else if(selectType == 'Other'){
+          var othr = $('#othernote').val(), er = "", et = "";
+          if(othr == ""){
+            $.alert("please fill required fields.")
+          }else{
+            database.addRecord(selectType, othr, er, et);
+            clearField();
+            populateRecord()
+            if(quickview.hasClass('active')){
+                quickview.removeClass('active');
+            }
+            $.alert("New Other details added.");
+          }
+        }
+    }
+
+    function clearField(){
+      $('#wifiname').val("");
+      $('#wifipswd').val("");
+      $('#wifinotes').val("");
+
+      $('#swnm').val("");
+      $('#swsec').val("");
+      $('#wsnote').val("");
+
+      $('#insname').val("");
+      $('#inspolicy').val("");
+      $('#insnotes').val("");
+
+      $('#nothead').val("");
+      $('#notbody').val("");
+
+      $('#othernote').val("");
+    }
+  function populateRecord() {
+      database.getRecord(function(detail) {
+      var DetailBody = '',head,othr;
+      for (i = 0; i < detail.length; i++) {
+        if(detail[i].type == "Other"){ othr = "Inforation here"}else{
+          othr = detail[i].cat1;
+        }
+        DetailBody += '<div class="product">'+
+            '<h2 class="header">' + detail[i].type + '</h2>'+ othr +
+            '<hr style="margin-top: 3px;"><br><br><br> '+
+            '<div class="description">'+
+                
+            '</div>'+        
+            '<div class="quickbtn btn" onclick="quickViewz(\'' + detail[i].type + '\',\'' + detail[i].cat1 + '\',\'' + detail[i].cat2 + '\',\'' + detail[i].cat3 + '\',\'' + detail[i]._id + '\')">Quickview</div>'+
+            '<div class="quickview">Go to Web</div>'+
+          '</div>';
+      }
+        var $log = $( "#conatainer" ),
+        str = DetailBody,
+        html = $.parseHTML( str );
+        $log.html( html );
+      });
+  }
+
+      function quickViewz(type,cat1,cat2,cat3,iid) {
+      var quickViewHeader = $('.quickviewContainer .headline'),
+        quickViewDescription = $('.quickviewContainer .description'),
+        newform =$('#newform'),
+        hided = hidePassword(cat2);
+      if(type == 'WiFi Password'){      
+        var   contend = '<div class="lbl">SSID Name :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-username" onclick="copyFunc(\'' + cat1 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat1 +'</div>'+
+              '<div class="lbl">Wifi Password :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-password" onclick="copyFunc(\'' + cat2 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ hided +'</div>' +
+              '<div class="lbl">Extra Information :</div>'+
+            '<div class="field" style="min-height: 80px;">'+
+              '<button class="copy-button copy-url" onclick="copyFunc(\'' + cat3 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+cat3+'</div>';
+      }
+      if(type == 'Software Licence'){
+        var   contend = '<div class="lbl">Software Name :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-username" onclick="copyFunc(\'' + cat1 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat1 +'</div>'+
+              '<div class="lbl">Licence Key :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-password" onclick="copyFunc(\'' + cat2 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat2 +'</div>' +
+              '<div class="lbl">Extra Information :</div>'+
+            '<div class="field" style="min-height: 80px;">'+
+              '<button class="copy-button copy-url" onclick="copyFunc(\'' + cat3 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+cat3+'</div>';
+      }
+      if(type == 'Insurance cards'){
+        var   contend = '<div class="lbl">Insuarance Provider :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-username" onclick="copyFunc(\'' + cat1 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat1 +'</div>'+
+              '<div class="lbl">Policy Number :</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-password" onclick="copyFunc(\'' + cat2 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat2 +'</div>' +
+              '<div class="lbl">Extra Information :</div>'+
+            '<div class="field" style="min-height: 80px;">'+
+              '<button class="copy-button copy-url" onclick="copyFunc(\'' + cat3 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+cat3+'</div>';
+      }
+      if(type == 'Simple Note'){
+        var   contend = '<div class="lbl">Note Heading:</div>'+
+            '<div class="field">'+
+              '<button class="copy-button copy-username" onclick="copyFunc(\'' + cat1 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat1 +'</div>'+
+              '<div class="lbl">Note Content :</div>'+
+            '<div class="field"  style="min-height: 180px;">'+
+              '<button class="copy-button copy-password" onclick="copyFunc(\'' + cat2 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat2 +'</div>';
+      }             
+      if(type == 'Other'){
+        var   contend = '<div class="lbl">Other Content :</div>'+
+            '<div class="field"  style="min-height: 250px;">'+
+              '<button class="copy-button copy-password" onclick="copyFunc(\'' + cat1 + '\')">'+
+                '<img src="img/app-icon/copy.png" width="20px">'+
+              '</button> '+ cat1 +'</div>';
+      }
+    var del = '<br><br><center><button class="delBtn" onclick="deleteAlert(\'' + iid + '\')">Delete This Record</button></center>';
+      clearTimeout(timeQuick);
+      if(quickview.hasClass('active')){
+          quickview.removeClass('active');
+          newform.addClass('hide');
+          var timeQuick = setTimeout(function(){
+            quickview.addClass('active');
+          }, 300);
+        } else{
+          quickview.addClass('active');
+          newform.addClass('hide');
+        }
+      quickViewHeader.html(type);
+      quickViewDescription.html(contend + del);
+    }
+    function deleteAlert(idz){
+      var idx = idz;
+      $.confirm({
+          title: 'Delete Confirmation!',
+          content: 'Are you confirm to delete this record?',
+          type: 'red',
+          typeAnimated: true,
+          buttons: {
+              tryAgain: {
+                  text: 'Yes, Delete',
+                  btnClass: 'btn-red',
+                  action: function(){
+                    deleteDetail(idx);
+                  }
+              },
+              close: function () {
+              }
+          }
+      });
+    }
+
+    function copyFunc(contz) {
+      const {clipboard} = require('electron');
+      var content = contz;
+      clipboard.writeText(content);
+    }
+
+    function deleteDetail(id) {      
+      database.deleteRecord(id);
+      var quickview = $('.quickviewContainer');
+      quickview.removeClass('active');
+      populateRecord();
+    }
+     
+    function hidePassword(pass){
+      var final="";
+      var ftl = pass.substr(0, 2);
+      var count = pass.length - 2;
+        for (i = 0; i < count; i++) { 
+          final += "&#x25CF;";
+        }
+      var ret =ftl + final;
+      return ret;
+    }
+  </script> 
+</body>
+</html>

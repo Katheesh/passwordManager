@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="60px" viewBox="0 0 59 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>img-lastpass-log-in-and-go-auto-fill-passwords-svg-svg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.875 19.7916667 46.7916667 19.7916667 46.7916667 0.458333333 0.875 0.458333333"></polygon>
+        <filter x="-7.6%" y="-18.1%" width="115.2%" height="136.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="5" dy="-5" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.937254902   0 0 0 0 0.976470588   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="homepage-v1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-264.000000, -1483.000000)">
+        <g id="Group-26" transform="translate(100.000000, 1480.000000)">
+            <g id="LP-Standard">
+                <g id="Stacked-Group" transform="translate(0.000000, 4.000000)">
+                    <g id="img-lastpass-log-in-and-go-auto-fill-passwords-svg-svg" transform="translate(165.000000, 0.000000)">
+                        <g id="Group-3">
+                            <g id="Group-2" transform="translate(10.000000, 38.000000)" stroke-linecap="round" stroke-linejoin="round">
+                                <g id="Stroke-9">
+                                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                    <use stroke="#3B4763" stroke-width="2" xlink:href="#path-1"></use>
+                                </g>
+                            </g>
+                            <g id="Group-2">
+                                <path d="M1,37 L1,17 L4,17 L4,37 L6.25,37 C6.80228475,37 7.25,37.4477153 7.25,38 L7.25,41 L0.25,41 L0.25,37 L1,37 Z" id="Combined-Shape" fill="#EFF9FF"></path>
+                                <polyline id="Stroke-11" stroke="#3B4763" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="33.7275641 33.78125 33.7275641 16.40625 0 16.40625 0 40.8535591 6.35047571 40.8535591"></polyline>
+                                <path d="M16.5,34.21875 L16.5,28.875" id="Stroke-13" stroke="#D32D27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M7.84615385,15.859375 L7.84615385,9.515625 C7.84615385,4.25982812 11.9470769,0 17,0 C22.0559744,0 26.1538462,4.25982812 26.1538462,9.515625 L26.1538462,15.859375" id="Stroke-14" stroke="#3B4763" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M19.0307685,26.2513834 C19.0307685,27.6983875 17.8590762,28.8727676 16.4153839,28.8727676 C14.9716915,28.8727676 13.7999992,27.6983875 13.7999992,26.2513834 C13.7999992,24.8043793 14.9716915,23.6299992 16.4153839,23.6299992 C17.8590762,23.6299992 19.0307685,24.8043793 19.0307685,26.2513834 Z" id="Stroke-15" fill="#D32D27"></path>
+                            </g>
+                        </g>
+                        <circle id="Oval" fill="#3B4763" cx="20" cy="48" r="2"></circle>
+                        <circle id="Oval-Copy" fill="#3B4763" cx="29" cy="48" r="2"></circle>
+                        <circle id="Oval-Copy-2" fill="#3B4763" cx="38" cy="48" r="2"></circle>
+                        <path d="M45,43.5 L45,52.5" id="Line" stroke="#3B4763" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="58px" height="58px" viewBox="0 0 58 58" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>img-lastpass-simplify-online-shopping-fill-forms-svg-svg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M26.5294118,29 L4.82352941,29 C2.16094118,29 0,26.8346667 0,24.1666667 L0,4.83333333 C0,2.16533333 2.16094118,0 4.82352941,0 L36.1764706,0 C38.8390588,0 41,2.16533333 41,4.83333333 L41,14.5 L26.5294118,29 Z" id="path-1"></path>
+        <filter x="-8.5%" y="-12.1%" width="117.1%" height="124.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="5" dy="-5" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.937254902   0 0 0 0 0.976470588   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="30 55.3333333 55.7916667 55.3333333 55.7916667 36 30 36"></polygon>
+        <filter x="-13.6%" y="-18.1%" width="127.1%" height="136.2%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="5" dy="-5" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.937254902   0 0 0 0 0.976470588   0 0 0 0 1  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="homepage-v1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-672.000000, -1484.000000)">
+        <g id="Group-26" transform="translate(100.000000, 1480.000000)">
+            <g id="LP-Standard">
+                <g id="Stacked-Group" transform="translate(407.000000, 5.000000)">
+                    <g id="img-lastpass-simplify-online-shopping-fill-forms-svg-svg" transform="translate(166.000000, 0.000000)">
+                        <g id="Stroke-1" stroke-linecap="round" stroke-linejoin="round">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use stroke="#3B4763" stroke-width="2" xlink:href="#path-1"></use>
+                        </g>
+                        <path d="M0,6 L41,6" id="Stroke-3" stroke="#3B4763" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18,12 L6,12" id="Stroke-5" stroke="#D32D27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M35,12 L30,12" id="Stroke-7" stroke="#D32D27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M13,17 L6,17" id="Stroke-9" stroke="#D32D27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <g id="Stroke-11" stroke-linecap="round" stroke-linejoin="round">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                            <use stroke="#3B4763" stroke-width="2" xlink:href="#path-3"></use>
+                        </g>
+                        <path d="M43,50.5 L43,46.3333333" id="Stroke-13" stroke="#D32D27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M36,35.5833333 L36,30.75 C36,26.7455833 39.136,23.5 43,23.5 C46.8663333,23.5 50,26.7455833 50,30.75 L50,35.5833333" id="Stroke-14" stroke="#3B4763" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M45,43.9972451 C45,45.0997244 44.104,45.9944902 43,45.9944902 C41.896,45.9944902 41,45.0997244 41,43.9972451 C41,42.8947658 41.896,42 43,42 C44.104,42 45,42.8947658 45,43.9972451 Z" id="Stroke-15" fill="#D32D27"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,57 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SKH Password Manager 1.0</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript" src="js/index.js"></script>
+</head>
+<body>
+  <div class="container">
+
+  <h3>Add a person:</h3>
+    <div class="row">
+      <div class="five columns">
+        <label for="firstname">Firstname</label>
+        <input class="form-control" placeholder="John" id="firstname" type="text">
+      </div>
+      <div class="five columns">
+        <label for="lastname">Lastname</label>
+        <input class="form-control" placeholder="Doe" id="lastname" type="text">
+      </div>
+      <div class="two columns">
+        <label for="add" class="invisible">x</label>
+        <input class="btn btn-info" value="Add" id="add" type="button">
+      </div>
+    </div>
+
+    <h3>All persons:</h3>
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
+      </tbody>
+    </table>
+  </div>
+
+  <script type="text/javascript">
+    var remote = require('electron').remote;
+    document.addEventListener('keydown', function (e) {
+      if (e.which === 123) {
+        remote.getCurrentWindow().webContents.openDevTools();
+      } else if (e.which === 116) {
+        location.reload();
+      }
+    });
+
+  window.$ = window.jQuery = require("./js/jquery.min.js");
+  window.$ = window.jQuery = require("./js/bootstrap.min.js");
+
+  </script>
+</body>
+</html>

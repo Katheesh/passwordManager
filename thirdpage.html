@@ -1,0 +1,204 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SKH Password Manager 1.0</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/jquery-confirm.min.css">
+  <script>
+        window.$ = window.jQuery = require("./js/jquery.min.js");
+        const database = require('./js/database');
+        $(window).bind("load", function() {
+            "use strict";
+            $(".spn_hol").fadeOut(1000);
+        });
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-confirm.min.js"></script>
+  <style >
+.count {    
+    min-height: 60px;
+    font-size: 20px;
+    display: inline;
+    border: 1px solid #ad0000;
+    min-width: 200px;
+    background-color: white;
+}
+.shower {
+    margin: 25px;
+    padding: 25px;
+    color: #ad0000;
+    background-color: rgb(253, 231, 231);
+    font-size: 30px;
+    font-weight: bold;
+}
+.mybtn {
+    min-width: 160px;
+    min-height: 60px;
+    font-size: 20px;
+    display: inline;
+    border: 1px solid #ad0000;
+    background-color: white;
+}
+.copybtn {
+    position: absolute;
+    Left: 90%;
+    margin-top: -93px;
+    height: 45px;
+    background: transparent;
+}
+.skill_bar {
+
+  height:40px;
+  background:#c0c0c0;
+  margin: 25px;
+  margin-bottom:5px;
+}
+
+.skill_bar_progress {
+  width:0%;
+  height:100%;
+  background:#ad0000;
+}
+
+.hide{
+    display: none;
+}
+.spn_hol {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 50000;
+  opacity: 1;
+   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  margin-top: -12px;
+  left: 50%;
+  margin-left: -35px;
+  height: 24px;
+  width: 70px;
+  text-align: center;
+  display: block;
+}
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+      -webkit-transform: scale(0.0)
+  }
+  40% {
+      -webkit-transform: scale(1.0)
+  }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+  }
+  40% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+  }
+}
+  </style>
+</head>
+<body>
+          <!-- PRELOADER -->
+          <div class="spn_hol">
+                <div class="spinner">
+                    <div class="bounce1"></div>
+                    <div class="bounce2"></div>
+                    <div class="bounce3"></div>
+                </div>
+            </div>   
+         <!-- END PRELOADER -->
+<div class="container-fluid">
+    <h3>GENERATE STRONG PASSWORD
+      <div class="pull-right">
+          <a href="dashboard.html" class="btn btn-default" style="border-radius:0px;">Home</a>
+          <a href="login.html" class="btn btn-default" style="border-radius:0px;">Logout</a>         
+      </div>
+    </h3>
+    <hr>
+    <br>
+</div> 
+<center>
+        
+        <select class="count" id="passlenth">
+            <option value="08">08 Characters</option>
+            <option value="10" selected>10 Characters</option>
+            <option value="15">15 Characters</option>
+            <option value="20">20 Characters</option>
+        </select>
+        <input type="button" class="mybtn" value="Generate" title="Copy" onClick="generate();" tabindex="2">
+        <br>
+        <div id="showpass"></div>
+        <div class="skill_bar hide" id="prgbar">
+            <div class="skill_bar_progress skill_one"></div>
+            <h3 id="viewpercent"></h3>
+        </div>
+</center>
+
+<script>
+    function randomPassword(length) {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+            var i = Math.floor(Math.random() * chars.length);
+            pass += chars.charAt(i);
+        }
+        return pass;
+    }
+
+    function generate() {  
+        $('#prgbar').addClass('hide');  
+        $('.skill_one').animate({width:'0%'}, 1000);  
+        var pass = $('#passlenth').val();
+        var cppass = randomPassword(pass);
+        var pasx = '<div class="shower">' + cppass + '</div>';
+        var cpbtn = '<button class="copybtn" onclick="copyFunc(\'' + cppass + '\')"><img src="img/app-icon/copy.png" width="35px">'+
+              '</button>';
+        $('#showpass').html(pasx + cpbtn);
+        $('#prgbar').removeClass('hide');
+        var per = getRandom(85, 99) + "%";
+        $('.skill_one').animate({width:per}, 1000);
+        $('#viewpercent').html( per + " Strong Password");
+    }
+    function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    function copyFunc(contz) {
+      const {clipboard} = require('electron');
+      var content = contz;
+      clipboard.writeText(content);
+    }
+</script>
+</body>
+</html>

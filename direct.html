@@ -1,0 +1,110 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SKH Password Manager 1.0</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/jquery-confirm.min.css">
+  <script>
+        window.$ = window.jQuery = require("./js/jquery.min.js");
+        const database = require('./js/database');
+        $(window).bind("load", function() {
+            "use strict";
+            $(".spn_hol").fadeOut(1000);
+        });
+        var os= require('os')
+        var usernm = os.userInfo().username;
+        console.log(usernm);
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-confirm.min.js"></script>
+  <style>
+.spn_hol {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 50000;
+  opacity: 1;
+   -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  margin-top: -12px;
+  left: 50%;
+  margin-left: -35px;
+  height: 24px;
+  width: 70px;
+  text-align: center;
+  display: block;
+}
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+      -webkit-transform: scale(0.0)
+  }
+  40% {
+      -webkit-transform: scale(1.0)
+  }
+}
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+  }
+  40% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+  }
+}
+  </style>
+</head>
+<body>
+      <!-- PRELOADER -->
+      <div class="spn_hol">
+          <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+          </div>
+      </div>   
+   <!-- END PRELOADER -->
+<div class="container-fluid">
+    <h3>SKH Password Manager Feedback
+      <div class="pull-right">
+          <a href="dashboard.html" class="btn btn-default" style="border-radius:0px;">Home</a>         
+          <a href="login.html" class="btn btn-default" style="border-radius:0px;">Logout</a>         
+      </div>
+    </h3>
+    <hr>
+</div>    
+<div class="container-fluid">
+    <iframe style="height: 80%; width: 100%; border: 1px solid black;" src="http://bell.orgfree.com/pwmngr/"></iframe>
+</div>
+</body>
+</html>
